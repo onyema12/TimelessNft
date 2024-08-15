@@ -1,0 +1,14 @@
+.Box1{
+   border: 3px solid red;
+   display: flex;
+   width: 100%;
+   justify-content: space-between;
+}
+
+.Box2{
+    border:2px solid green;
+}
+
+.Box3{
+    border: 2px solid yellow;
+}

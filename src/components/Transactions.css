@@ -1,0 +1,9 @@
+.TransactBtn{
+    background-color: white;
+    padding: 6px;
+}
+.TransactBtn:hover{
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}

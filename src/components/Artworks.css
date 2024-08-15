@@ -1,0 +1,10 @@
+.ArtworkBtn{
+        background-color: black;
+        padding: 12px;
+        color: white;
+}
+
+.ArtworkBtn:hover{
+    background-color: white;
+    color: black;
+}
