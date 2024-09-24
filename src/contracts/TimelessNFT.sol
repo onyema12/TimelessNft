@@ -6,6 +6,22 @@ import "./ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract TimelessNFT is ERC721Enumerable, Ownable {
+
+     constructor (
+   string memory _name,
+   string memory _symbol,
+   uint256 _royalityFee,
+   address _artist
+  
+)     ERC721(_name, _symbol) Ownable( _artist) {
+   royalityFee = _royalityFee;
+   artist = _artist;
+}
+
+// constructor initialOwner{
+
+// }
+
        using Strings for uint256;
        mapping(string => uint8) existingURIs;
        mapping(uint256 => address) public holderOf;
@@ -38,15 +54,6 @@ TransactionStruct[] transactions;
 TransactionStruct[] minted;
  
 
- constructor(
-   string memory _name,
-   string memory _symbol,
-   uint256 _royalityFee,
-   address _artist
-) ERC721(_name, _symbol) {
-   royalityFee = _royalityFee;
-   artist = _artist;
-}
 
 
 function payToMint(

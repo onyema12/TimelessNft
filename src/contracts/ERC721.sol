@@ -11,13 +11,14 @@ pragma solidity ^0.8.0;
 // import "../../utils/Strings.sol";
 // import "../../utils/introspection/ERC165.sol";
 
-import "./IERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
-import "./IERC721Metadata.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+import "./IERC721.sol";
+import "./IERC721Metadata.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
+
 
 /**
  * @dev Implementation of https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard, including
@@ -454,6 +455,14 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
         emit ApprovalForAll(owner, operator, approved);
     }
 
+       function isContract(address account) internal view returns (bool) {
+        uint256 size;
+        assembly {
+            size := extcodesize(account) // Get the size of the code at the address
+        }
+        return size > 0; // If size is greater than 0, it's a contract
+    }
+
     /**
      * @dev Internal function to invoke {IERC721Receiver-onERC721Received} on a target address.
      * The call is not executed if the target address is not a contract.
@@ -464,13 +473,16 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      * @param _data bytes optional data to send along with the call
      * @return bool whether the call correctly returned the expected magic value
      */
+
+
+     
     function _checkOnERC721Received(
         address from,
         address to,
         uint256 tokenId,
         bytes memory _data
     ) private returns (bool) {
-        if (to.isContract()) {
+        if (isContract(to)) {
             try
                 IERC721Receiver(to).onERC721Received(
                     _msgSender(),
